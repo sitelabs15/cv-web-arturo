@@ -1,0 +1,256 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-success: var(--success);
+
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --shadow-glow: 0 0 60px -10px color-mix(in oklab, var(--primary) 50%, transparent);
+  --shadow-elegant: 0 24px 60px -20px rgb(0 0 0 / 0.6);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Dark premium default */
+  --background: oklch(0.16 0.02 265);
+  --foreground: oklch(0.95 0.01 250);
+  --surface: oklch(0.20 0.025 265);
+  --surface-2: oklch(0.235 0.03 265);
+
+  --card: oklch(0.20 0.025 265);
+  --card-foreground: oklch(0.95 0.01 250);
+  --popover: oklch(0.20 0.025 265);
+  --popover-foreground: oklch(0.95 0.01 250);
+
+  --primary: oklch(0.62 0.22 295);      /* violet #7C3AED-ish */
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.25 0.03 265);
+  --secondary-foreground: oklch(0.95 0.01 250);
+  --muted: oklch(0.25 0.03 265);
+  --muted-foreground: oklch(0.72 0.02 255);
+  --accent: oklch(0.62 0.22 295);
+  --accent-foreground: oklch(0.99 0 0);
+  --success: oklch(0.72 0.18 150);      /* green */
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.10);
+  --ring: oklch(0.62 0.22 295);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  ::selection { background: color-mix(in oklab, var(--primary) 40%, transparent); color: white; }
+}
+
+/* Background gradient mesh */
+@utility bg-mesh {
+  background:
+    radial-gradient(60% 50% at 20% 10%, color-mix(in oklab, var(--primary) 25%, transparent), transparent 60%),
+    radial-gradient(50% 50% at 90% 10%, color-mix(in oklab, oklch(0.55 0.22 255) 22%, transparent), transparent 60%),
+    radial-gradient(60% 60% at 50% 100%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 60%),
+    var(--background);
+}
+
+@utility text-gradient {
+  background: linear-gradient(135deg, oklch(0.99 0 0) 0%, color-mix(in oklab, var(--primary) 80%, white) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-gradient-violet {
+  background: linear-gradient(135deg, oklch(0.72 0.22 295), oklch(0.65 0.20 255));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in oklab, white 8%, transparent);
+}
+
+@utility card-hover {
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 450ms, border-color 450ms;
+  outline: none;
+  &:hover, &:focus-within {
+    transform: translateY(-6px) scale(1.015);
+    border-color: color-mix(in oklab, white 15%, transparent);
+    box-shadow: var(--shadow-elegant), 0 0 30px -5px color-mix(in oklab, var(--primary) 20%, transparent);
+  }
+  
+  & img {
+    transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover img, &:focus-within img {
+    transform: scale(1.04);
+  }
+  
+  & .card-tag {
+    transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms;
+  }
+  &:hover .card-tag, &:focus-within .card-tag {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+}
+
+@utility btn-glow {
+  box-shadow: 0 10px 25px -10px color-mix(in oklab, var(--primary) 65%, transparent);
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms, filter 250ms;
+  &:hover, &:focus-visible { 
+    filter: brightness(1.08); 
+    transform: translateY(-1.5px);
+    box-shadow: 0 14px 35px -10px color-mix(in oklab, var(--primary) 80%, transparent), 0 0 15px -3px color-mix(in oklab, var(--primary) 40%, transparent); 
+  }
+  &:active { transform: translateY(0) scale(0.98); }
+}
+
+@utility btn-secondary-hover {
+  transition: border-color 250ms cubic-bezier(0.16, 1, 0.3, 1), background-color 250ms, transform 250ms;
+  &:hover, &:focus-visible {
+    border-color: color-mix(in oklab, white 25%, transparent);
+    background-color: color-mix(in oklab, white 6%, transparent);
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+@utility icon-link-hover {
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), color 250ms;
+  &:hover, &:focus-visible {
+    transform: translateY(-1.5px) scale(1.05);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@utility animate-float { animation: float-slow 7s ease-in-out infinite; }
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@utility reveal { animation: reveal-up .7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@utility animate-marquee { animation: marquee 30s linear infinite; }
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@utility animate-marquee-reverse { animation: marquee-reverse 30s linear infinite; }
+
+@keyframes aurora-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@utility bg-aurora {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -12;
+    background: linear-gradient(
+      125deg,
+      color-mix(in oklab, var(--primary) 12%, transparent) 0%,
+      color-mix(in oklab, oklch(0.55 0.22 255) 10%, transparent) 30%,
+      color-mix(in oklab, oklch(0.72 0.18 150) 8%, transparent) 70%,
+      color-mix(in oklab, var(--primary) 12%, transparent) 100%
+    );
+    background-size: 300% 300%;
+    animation: aurora-flow 22s ease infinite;
+    filter: blur(100px);
+    opacity: 0.85;
+  }
+}
+
+
+@utility glass-premium {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@utility text-stroke-white {
+  color: transparent !important;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.15);
+  stroke-width: 1px;
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float, .bg-aurora::before, .animate-marquee {
+    animation: none !important;
+  }
+}
