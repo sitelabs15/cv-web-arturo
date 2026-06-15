@@ -36,6 +36,7 @@ import work2 from "@/assets/work-2.jpg";
 import work3 from "@/assets/work-3.png";
 import work4 from "@/assets/work-4.jpg";
 import work5 from "@/assets/work-5.jpg";
+import { AntigravityPanel } from "@/components/AntigravityPanel";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -108,6 +109,7 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [antigravity, setAntigravity] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Mouse tilt variables for 3D Parallax visual
@@ -413,7 +415,7 @@ function Index() {
               
               {/* Main Phone Feed */}
               <div 
-                className="relative mx-auto aspect-[9/19] w-full max-w-[320px] rounded-[2.6rem] border border-white/10 bg-surface p-3 shadow-elegant transition-all duration-300"
+                className={`relative mx-auto aspect-[9/19] w-full max-w-[320px] rounded-[2.6rem] border border-white/10 bg-surface p-3 shadow-elegant transition-all duration-300 ${antigravity ? "animate-antigravity-1" : ""}`}
                 style={{ transform: "translateZ(40px)" }}
               >
                 <div className="absolute left-1/2 top-2 z-10 h-5 w-24 -translate-x-1/2 rounded-b-2xl bg-background" />
@@ -428,7 +430,7 @@ function Index() {
 
               {/* Floating Mockup Right */}
               <div 
-                className="absolute -right-2 top-10 hidden w-36 overflow-hidden rounded-2xl border border-white/10 shadow-elegant sm:block transition-all duration-300"
+                className={`absolute -right-2 top-10 hidden w-36 overflow-hidden rounded-2xl border border-white/10 shadow-elegant sm:block transition-all duration-300 ${antigravity ? "animate-antigravity-2" : ""}`}
                 style={{ transform: "translateZ(80px) rotate(6deg)" }}
               >
                 <img src={work3} alt="" className="h-44 w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
@@ -436,7 +438,7 @@ function Index() {
 
               {/* Floating Mockup Left */}
               <div 
-                className="absolute -left-4 bottom-6 hidden w-32 overflow-hidden rounded-2xl border border-white/10 shadow-elegant sm:block transition-all duration-300"
+                className={`absolute -left-4 bottom-6 hidden w-32 overflow-hidden rounded-2xl border border-white/10 shadow-elegant sm:block transition-all duration-300 ${antigravity ? "animate-antigravity-3" : ""}`}
                 style={{ transform: "translateZ(60px) rotate(-6deg)" }}
               >
                 <img src={work4} alt="" className="h-40 w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
@@ -491,7 +493,7 @@ function Index() {
           {/* Left: Silhouette Image with Premium Glow Backdrop */}
           <div className="md:col-span-5 relative group flex justify-center">
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-primary/20 via-[oklch(0.55_0.22_255)]/10 to-transparent blur-3xl opacity-70 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-surface/40 p-5 shadow-elegant backdrop-blur-md max-w-[340px]">
+            <div className={`relative overflow-hidden rounded-3xl border border-white/10 bg-surface/40 p-5 shadow-elegant backdrop-blur-md max-w-[340px] ${antigravity ? "animate-antigravity-1" : ""}`}>
               <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent z-10" />
               <img
                 src={portraitNoBg}
@@ -546,14 +548,16 @@ function Index() {
             { icon: Film, t: "Reels y Video", d: "Edición ágil en Premiere, DaVinci y CapCut. Motion en AE." },
             { icon: Layers, t: "Branding", d: "Identidad, líneas gráficas y manuales aplicables." },
             { icon: Printer, t: "Impresión / Web Jr", d: "Gran formato, materiales comerciales y soporte WordPress." },
-          ].map(({ icon: Icon, t, d }) => (
+          ].map(({ icon: Icon, t, d }, i) => (
             <motion.div
               key={t}
               tabIndex={0}
               whileHover={prefersReducedMotion ? {} : { y: -6, scale: 1.015 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.995 }}
               transition={{ duration: 0.45, ease: easeSnappy }}
-              className="card-hover group rounded-2xl border border-border bg-surface/60 p-6 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none"
+              className={`card-hover group rounded-2xl border border-border bg-surface/60 p-6 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none ${
+                antigravity ? (i % 3 === 0 ? "animate-antigravity-1" : i % 3 === 1 ? "animate-antigravity-2" : "animate-antigravity-3") : ""
+              }`}
             >
               <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.55_0.22_255)] text-white shadow-glow">
                 <Icon className="h-5 w-5" />
@@ -602,14 +606,16 @@ function Index() {
             <div>
               <h3 className="mb-6 text-sm font-semibold uppercase tracking-widest text-primary">Soft skills</h3>
               <div className="grid gap-4 sm:grid-cols-2">
-                {SOFT_SKILLS.map(({ icon: Icon, title, desc }) => (
+                {SOFT_SKILLS.map(({ icon: Icon, title, desc }, i) => (
                   <motion.div
                     key={title}
                     tabIndex={0}
                     whileHover={prefersReducedMotion ? {} : { y: -6, scale: 1.015 }}
                     whileTap={prefersReducedMotion ? {} : { scale: 0.995 }}
                     transition={{ duration: 0.45, ease: easeSnappy }}
-                    className="card-hover rounded-2xl border border-border bg-surface/70 p-5 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none"
+                    className={`card-hover rounded-2xl border border-border bg-surface/70 p-5 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none ${
+                      antigravity ? (i % 3 === 0 ? "animate-antigravity-2" : i % 3 === 1 ? "animate-antigravity-3" : "animate-antigravity-1") : ""
+                    }`}
                   >
                     <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/15 text-primary">
                       <Icon className="h-5 w-5" />
@@ -637,14 +643,16 @@ function Index() {
             { n: "02", t: "Research + tendencia", d: "Marca, audiencia, referencia visual y best-in-class." },
             { n: "03", t: "Concepto → batch", d: "Línea gráfica, plantillas y producción por lotes." },
             { n: "04", t: "Entrega + iteración", d: "Versiones por formato, naming consistente y revisión." },
-          ].map((s) => (
+          ].map((s, i) => (
             <motion.div
               key={s.n}
               tabIndex={0}
               whileHover={prefersReducedMotion ? {} : { y: -6, scale: 1.015 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.995 }}
               transition={{ duration: 0.45, ease: easeSnappy }}
-              className="card-hover rounded-2xl border border-border bg-surface/60 p-6 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none"
+              className={`card-hover rounded-2xl border border-border bg-surface/60 p-6 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none ${
+                antigravity ? (i % 3 === 0 ? "animate-antigravity-2" : i % 3 === 1 ? "animate-antigravity-1" : "animate-antigravity-3") : ""
+              }`}
             >
               <div className="text-5xl font-extrabold text-gradient-violet">{s.n}</div>
               <h3 className="mt-4 font-semibold">{s.t}</h3>
@@ -682,7 +690,9 @@ function Index() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.65, ease: easeOutQuint, delay: i * 0.12 }}
-                className="group py-8 px-4 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white/[0.015] transition-colors duration-300 rounded-xl"
+                className={`group py-8 px-4 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white/[0.015] transition-colors duration-300 rounded-xl ${
+                  antigravity ? (i % 3 === 0 ? "animate-antigravity-1" : i % 3 === 1 ? "animate-antigravity-2" : "animate-antigravity-3") : ""
+                }`}
               >
                 {/* Left Column: Number + Name */}
                 <div className="flex items-center gap-6 min-w-[280px]">
@@ -728,14 +738,16 @@ function Index() {
               {[
                 { t: "Ingeniería en Software Web y Diseño", s: "DASC · Instituto Tecnológico Universitario" },
                 { t: "Diseño Gráfico", s: "Instituto de Artes Visuales del Estado de Puebla" },
-              ].map((ed) => (
+              ].map((ed, i) => (
                 <motion.div
                   key={ed.t}
                   tabIndex={0}
                   whileHover={prefersReducedMotion ? {} : { y: -6, scale: 1.015 }}
                   whileTap={prefersReducedMotion ? {} : { scale: 0.995 }}
                   transition={{ duration: 0.45, ease: easeSnappy }}
-                  className="card-hover flex items-start gap-4 rounded-2xl border border-border bg-surface/60 p-5 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none"
+                  className={`card-hover flex items-start gap-4 rounded-2xl border border-border bg-surface/60 p-5 focus-visible:ring-2 focus-visible:ring-primary cursor-pointer select-none ${
+                    antigravity ? (i % 2 === 0 ? "animate-antigravity-1" : "animate-antigravity-3") : ""
+                  }`}
                 >
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
                     <GraduationCap className="h-5 w-5" />
@@ -773,8 +785,10 @@ function Index() {
                 { icon: MapPin, t: "Ubicación", v: "Puebla, MX · Remoto" },
                 { icon: Languages, t: "Idiomas", v: "Español · Inglés C1" },
                 { icon: Clock, t: "Disponibilidad", v: "L–V · Zona CDMX" },
-              ].map(({ icon: Icon, t, v }) => (
-                <Card key={t} tabIndex={0} className="rounded-2xl border-border bg-surface/60 p-4 focus-visible:ring-2 focus-visible:ring-primary transition-all duration-300 hover:border-primary/30">
+              ].map(({ icon: Icon, t, v }, i) => (
+                <Card key={t} tabIndex={0} className={`rounded-2xl border-border bg-surface/60 p-4 focus-visible:ring-2 focus-visible:ring-primary transition-all duration-300 hover:border-primary/30 ${
+                  antigravity ? (i % 3 === 0 ? "animate-antigravity-3" : i % 3 === 1 ? "animate-antigravity-1" : "animate-antigravity-2") : ""
+                }`}>
                   <Icon className="h-4 w-4 text-primary" />
                   <div className="mt-3 text-[11px] uppercase tracking-widest text-muted-foreground">{t}</div>
                   <div className="mt-1 text-sm font-medium">{v}</div>
@@ -867,6 +881,9 @@ function Index() {
       >
         <MessageCircle className="h-6 w-6" />
       </a>
+
+      {/* Antigravity Controller Easter Egg Panel */}
+      <AntigravityPanel antigravity={antigravity} setAntigravity={setAntigravity} />
     </div>
   );
 }

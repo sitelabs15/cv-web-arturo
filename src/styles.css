@@ -242,6 +242,29 @@
   stroke: rgba(255, 255, 255, 0.15);
 }
 
+@keyframes antigravity-float-1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(1deg); }
+}
+@keyframes antigravity-float-2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-1deg); }
+}
+@keyframes antigravity-float-3 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(0.5deg); }
+}
+
+@utility animate-antigravity-1 {
+  animation: antigravity-float-1 7s ease-in-out infinite;
+}
+@utility animate-antigravity-2 {
+  animation: antigravity-float-2 9s ease-in-out infinite;
+}
+@utility animate-antigravity-3 {
+  animation: antigravity-float-3 8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   *, *::before, *::after {
@@ -250,7 +273,8 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .animate-float, .bg-aurora::before, .animate-marquee {
+  .animate-float, .bg-aurora::before, .animate-marquee, .animate-antigravity-1, .animate-antigravity-2, .animate-antigravity-3 {
     animation: none !important;
   }
 }
+
