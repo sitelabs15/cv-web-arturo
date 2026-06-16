@@ -35,6 +35,7 @@ import work2 from "@/assets/Diseño-2.png";
 import work3 from "@/assets/Diseño-3.png";
 import work4 from "@/assets/Diseño-5.png";
 import work5 from "@/assets/Diseño-4.png";
+import cvFile from "@/assets/CV_Arturo_Urbina_.pdf";
 import { AntigravityPanel } from "@/components/AntigravityPanel";
 
 export const Route = createFileRoute("/")({
@@ -369,7 +370,7 @@ function Index() {
               variants={staggerItem(prefersReducedMotion)}
               className="mt-9 flex flex-wrap items-center gap-3"
             >
-              <a href="https://portafolio-web-arturo-lvsuna9eb-arturourbina6161-2033s-projects.vercel.app/" target="_blank" rel="noreferrer">
+              <a href="https://arturo-portafolio.vercel.app/" target="_blank" rel="noreferrer">
                 <Button size="lg" className="rounded-full px-6 btn-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   Ver portafolio <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -379,12 +380,13 @@ function Index() {
                   <MessageCircle className="mr-1 h-4 w-4" /> WhatsApp
                 </Button>
               </a>
-              <button
-                onClick={() => window.print()}
+              <a
+                href={cvFile}
+                download="CV_Arturo_Urbina.pdf"
                 className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1"
               >
                 Descargar CV (PDF)
-              </button>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -577,7 +579,7 @@ function Index() {
             desc="Visita mi web dedicada para explorar todos mis proyectos y trabajos a detalle."
           />
           <div className="mt-10">
-            <a href="https://portafolio-web-arturo-lvsuna9eb-arturourbina6161-2033s-projects.vercel.app/" target="_blank" rel="noreferrer">
+            <a href="https://arturo-portafolio.vercel.app/" target="_blank" rel="noreferrer">
               <Button size="lg" className="rounded-full px-8 btn-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                 Ver portafolio completo <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
