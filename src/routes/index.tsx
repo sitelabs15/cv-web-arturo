@@ -1,14 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   Menu, X, MessageCircle, Mail, Download, ArrowRight,
   Sparkles, Palette, Film, Layers, Printer, CheckCircle2,
-  Briefcase, GraduationCap, MapPin, Languages, Clock, Phone, Send, Loader2,
+  Briefcase, GraduationCap, MapPin, Languages, Clock, Phone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
@@ -31,11 +30,11 @@ import {
 import heroBg from "@/assets/hero-bg.jpg";
 import portrait from "@/assets/portrait.jpg";
 import portraitNoBg from "@/assets/portrait-nobg.png";
-import work1 from "@/assets/work-1.jpg";
-import work2 from "@/assets/work-2.jpg";
-import work3 from "@/assets/work-3.png";
-import work4 from "@/assets/work-4.jpg";
-import work5 from "@/assets/work-5.jpg";
+import work1 from "@/assets/Diseño-1.png";
+import work2 from "@/assets/Diseño-2.png";
+import work3 from "@/assets/Diseño-3.png";
+import work4 from "@/assets/Diseño-5.png";
+import work5 from "@/assets/Diseño-4.png";
 import { AntigravityPanel } from "@/components/AntigravityPanel";
 
 export const Route = createFileRoute("/")({
@@ -370,8 +369,8 @@ function Index() {
               variants={staggerItem(prefersReducedMotion)}
               className="mt-9 flex flex-wrap items-center gap-3"
             >
-              <a href="#portafolio">
-                <Button size="lg" className="rounded-full px-6 btn-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" disabled>
+              <a href="https://portafolio-web-arturo-lvsuna9eb-arturourbina6161-2033s-projects.vercel.app/" target="_blank" rel="noreferrer">
+                <Button size="lg" className="rounded-full px-6 btn-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   Ver portafolio <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               </a>
@@ -433,7 +432,7 @@ function Index() {
                 className={`absolute -right-2 top-10 hidden w-36 overflow-hidden rounded-2xl border border-white/10 shadow-elegant sm:block transition-all duration-300 ${antigravity ? "animate-antigravity-2" : ""}`}
                 style={{ transform: "translateZ(80px) rotate(6deg)" }}
               >
-                <img src={work3} alt="" className="h-44 w-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <img src={work3} alt="" className="w-full object-contain hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
 
               {/* Floating Mockup Left */}
@@ -575,13 +574,14 @@ function Index() {
           <SectionHeader
             eyebrow="Portafolio"
             title="Mi portafolio completo"
-            desc="Próximamente en su propia web. Mientras tanto, contáctame para ver trabajos específicos o agendar una entrevista."
+            desc="Visita mi web dedicada para explorar todos mis proyectos y trabajos a detalle."
           />
           <div className="mt-10">
-            <Button size="lg" className="rounded-full px-8 btn-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" disabled>
-              Ver portafolio completo <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <p className="mt-3 text-xs text-muted-foreground">Enlace disponible próximamente</p>
+            <a href="https://portafolio-web-arturo-lvsuna9eb-arturourbina6161-2033s-projects.vercel.app/" target="_blank" rel="noreferrer">
+              <Button size="lg" className="rounded-full px-8 btn-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                Ver portafolio completo <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
           </div>
         </div>
       </ScrollReveal>
@@ -806,20 +806,19 @@ function Index() {
             <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
             <div className="pointer-events-none absolute -left-16 -bottom-20 h-72 w-72 rounded-full bg-[oklch(0.55_0.22_255)]/30 blur-3xl" />
 
-            <div className="relative grid gap-10 md:grid-cols-2">
-              <div>
+            <div className="relative flex flex-col items-center text-center">
                 <Badge variant="outline" className="rounded-full border-primary/40 bg-primary/10 text-primary">
                   Contacto
                 </Badge>
                 <h2 className="mt-5 text-3xl font-extrabold tracking-tight md:text-5xl">
                   Listo para diseñar <span className="text-gradient-violet">contenido que convierta</span>.
                 </h2>
-                <p className="mt-5 max-w-md text-muted-foreground">
+                <p className="mt-5 max-w-lg text-muted-foreground">
                   Puedo integrarme a tu flujo creativo, entregar a tiempo y proponer
                   líneas gráficas frescas para cada marca del portafolio.
                 </p>
 
-                <div className="mt-7 flex flex-wrap gap-3">
+                <div className="mt-7 flex flex-wrap justify-center gap-3">
                   <a
                     href={`mailto:${EMAIL}?subject=Entrevista%20—%20Dise%C3%B1ador%20de%20Contenido&body=Hola%20Arturo%2C%20me%20gustar%C3%ADa%20agendar%20una%20entrevista.`}
                   >
@@ -834,7 +833,7 @@ function Index() {
                   </a>
                 </div>
 
-                <div className="mt-8 grid gap-3 text-sm">
+                <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm">
                   <a href={`tel:+522221711844`} className="flex items-center gap-3 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded px-1">
                     <Phone className="h-4 w-4 text-primary" /> +52 222 171 1844
                   </a>
@@ -842,9 +841,6 @@ function Index() {
                     <Mail className="h-4 w-4 text-primary" /> {EMAIL}
                   </a>
                 </div>
-              </div>
-
-              <ContactForm />
             </div>
           </div>
         </div>
@@ -871,16 +867,24 @@ function Index() {
         <p className="mt-6 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} Arturo Urbina. Todos los derechos reservados.</p>
       </ScrollReveal>
 
-      {/* WhatsApp Floating */}
-      <a
-        href={WHATSAPP}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="WhatsApp"
-        className="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-success to-[oklch(0.55_0.18_150)] text-white shadow-elegant btn-glow"
-      >
-        <MessageCircle className="h-6 w-6" />
-      </a>
+      {/* WhatsApp Floating — portaled to body so it escapes all transform/stacking contexts */}
+      {typeof document !== "undefined" && createPortal(
+        <div className="whatsapp-fab-wrapper fixed bottom-5 right-5 z-[9999] flex items-center gap-3">
+          <span className="fab-tooltip rounded-full bg-surface border border-border px-4 py-2 text-sm font-semibold text-foreground shadow-elegant whitespace-nowrap select-none">
+            ¡Envíame un mensaje!
+          </span>
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="WhatsApp"
+            className="animate-fab-bounce grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-success to-[oklch(0.55_0.18_150)] text-white shadow-elegant btn-glow"
+          >
+            <MessageCircle className="h-6 w-6" />
+          </a>
+        </div>,
+        document.body
+      )}
 
       {/* Antigravity Controller Easter Egg Panel */}
       <AntigravityPanel antigravity={antigravity} setAntigravity={setAntigravity} />
@@ -904,76 +908,6 @@ function SectionHeader({
   );
 }
 
-function ContactForm() {
-  const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      setState("error");
-      return;
-    }
-    setState("loading");
-    await new Promise((r) => setTimeout(r, 900));
-    // Fallback: open mailto with prefilled content
-    const subject = encodeURIComponent(`Contacto desde portafolio — ${form.name}${form.company ? ` (${form.company})` : ""}`);
-    const body = encodeURIComponent(`${form.message}\n\n—\n${form.name}\n${form.email}${form.company ? `\n${form.company}` : ""}`);
-    window.location.href = `mailto:${EMAIL}?subject=${subject}?body=${body}`;
-    setState("success");
-  };
-
-  return (
-    <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur md:p-7">
-      <div className="grid gap-4">
-        <div className="grid gap-2">
-          <label className="text-xs uppercase tracking-widest text-muted-foreground">Nombre</label>
-          <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Tu nombre" className="bg-surface/60 transition-all duration-300 focus:bg-surface/80 focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-0" />
-        </div>
-        <div className="grid gap-2 sm:grid-cols-2">
-          <div className="grid gap-2">
-            <label className="text-xs uppercase tracking-widest text-muted-foreground">Email</label>
-            <Input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="tu@email.com" className="bg-surface/60 transition-all duration-300 focus:bg-surface/80 focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-0" />
-          </div>
-          <div className="grid gap-2">
-            <label className="text-xs uppercase tracking-widest text-muted-foreground">Empresa</label>
-            <Input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Tu empresa" className="bg-surface/60 transition-all duration-300 focus:bg-surface/80 focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-0" />
-          </div>
-        </div>
-        <div className="grid gap-2">
-          <label className="text-xs uppercase tracking-widest text-muted-foreground">Mensaje</label>
-          <Textarea required rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Cuéntame qué necesitas…" className="bg-surface/60 transition-all duration-300 focus:bg-surface/80 focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-0" />
-        </div>
-
-        <Button type="submit" size="lg" className="rounded-full btn-glow relative flex items-center justify-center gap-2" disabled={state === "loading"}>
-          {state === "loading" ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin text-primary-foreground" />
-              <span>Enviando…</span>
-            </>
-          ) : state === "success" ? (
-            <>
-              <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
-              <span>¡Abriendo correo!</span>
-            </>
-          ) : (
-            <>
-              <Send className="mr-1 h-4 w-4" /> 
-              <span>Enviar mensaje</span>
-            </>
-          )}
-        </Button>
-
-        {state === "error" && (
-          <p className="text-sm text-destructive">Por favor completa los campos requeridos.</p>
-        )}
-        {state === "success" && (
-          <p className="text-sm text-success">¡Listo! Abriendo tu cliente de correo…</p>
-        )}
-      </div>
-    </form>
-  );
-}
 
 /* ---------- animations helper components ---------- */
 

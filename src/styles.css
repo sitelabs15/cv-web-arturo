@@ -265,6 +265,33 @@
   animation: antigravity-float-3 8s ease-in-out infinite;
 }
 
+/* WhatsApp FAB bounce + tooltip */
+@keyframes fab-bounce {
+  0%, 100% { transform: translateY(0); }
+  15% { transform: translateY(-6px); }
+  30% { transform: translateY(0); }
+  45% { transform: translateY(-3px); }
+  60% { transform: translateY(0); }
+}
+
+@utility animate-fab-bounce {
+  animation: fab-bounce 3s ease-in-out infinite;
+}
+
+.whatsapp-fab-wrapper .fab-tooltip {
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.whatsapp-fab-wrapper:hover .fab-tooltip,
+.whatsapp-fab-wrapper:focus-within .fab-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   *, *::before, *::after {
